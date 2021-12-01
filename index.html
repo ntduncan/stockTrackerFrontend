@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scss/styles.css">
+    <script src="Tickers.js" type="module" defer></script>
+    <script src="main.js" type="module" defer></script>
+    
+    <title>Stock Watch</title>
+    
+</head>
+<body>
+    <div class="banner">
+        <h2>Stock Watch</h2>
+    </div>
+    <header>
+        <div class="ticker-search-view block">
+            <h3>Search A Stock</h3>
+            <input type="text" name="search" class="search" placeholder="Search Ticker (e.g. AAPL)">
+            <button class="btn search-btn">Search</button>
+            <div class="search-result"></div>
+        </div>
+        <div class="ticker-list-view block"></div>
+    </header>
+    <main>
+        <div class="ticker-card-container block">
+        </div>
+    </main>
+</body>
+</html>

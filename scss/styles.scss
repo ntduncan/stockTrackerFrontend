@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+$primary: #D8E0E8;
+$secondary: #777;
+$background: #F1F1F1;
+$low: #EB6C7B;
+$high:	#8ad3a4;
+$font-family:'Inter', sans-serif;
+
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: $background;
+    font-family: $font-family;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    & > *{
+        margin-bottom: 1em;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    & > *{
+        margin-bottom: 1em;
+    }
+}
+
+input[type=text] {
+    background: $background;
+    border-radius: 5px;
+    height: 2em;
+    min-width: 70%;
+    
+    border: none;
+    margin-bottom: 1em;
+    border: 1px solid $secondary;
+}
+
+.block {
+    border-radius: 20px;
+    padding: 1em;
+}
+
+.btn {
+    border-radius: 5px;
+    border: none;
+    height: 2em;
+    width: fit-content;
+    background-color: $background;
+    border: 1px solid $secondary;
+    &:active {
+        background-color: $secondary;
+        color: $background;
+    }
+}
+
+.search-btn {
+    min-width: 20%;
+}
+
+.banner {
+    background-color: $secondary;
+    color: #FFF;
+    padding: 1em 2em;
+
+}
+
+.ticker-list-view {
+    background-color: $secondary;
+    color: $primary;
+    margin: 1em;
+}
+
+.watch-list-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin: 5px;
+    &__button{
+        border: 1px solid $primary;
+        color: $primary;
+        background-color: $secondary;
+        &:active {
+            color: $secondary;
+            background-color: $primary;
+        }
+    }
+}
+
+.ticker-search-view {
+    border: 3px solid $secondary;
+    margin: 1em;
+}
+
+.search-result {
+    text-align: center;
+}
+
+.ticker-card-container {
+    width: 100vw;
+}
+
+.ticker-card {
+    margin-bottom: 1em;
+    height: fit-content;
+    background-color: $primary;
+    
+    
+}
+
+.low {
+    border: 3px solid $low;
+    color: $low;
+}
+
+.high {
+    border: 3px solid $high;
+    color: $high;
+}
+
+@media only screen and (min-width: 650px) {
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+    .ticker-card-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+
+    }
+    .ticker-card {
+       min-width: 15em;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+    .ticker-card-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: start;
+    
+    }
+    .ticker-card {
+       min-width: 10em;
+       margin-right: 1em;
+    }
+}

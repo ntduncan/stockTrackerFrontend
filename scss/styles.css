@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #F1F1F1;
+  font-family: "Inter", sans-serif;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+header > * {
+  margin-bottom: 1em;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+main > * {
+  margin-bottom: 1em;
+}
+
+input[type=text] {
+  background: #F1F1F1;
+  border-radius: 5px;
+  height: 2em;
+  min-width: 70%;
+  border: none;
+  margin-bottom: 1em;
+  border: 1px solid #777;
+}
+
+.block {
+  border-radius: 20px;
+  padding: 1em;
+}
+
+.btn {
+  border-radius: 5px;
+  border: none;
+  height: 2em;
+  width: fit-content;
+  background-color: #F1F1F1;
+  border: 1px solid #777;
+}
+.btn:active {
+  background-color: #777;
+  color: #F1F1F1;
+}
+
+.search-btn {
+  min-width: 20%;
+}
+
+.banner {
+  background-color: #777;
+  color: #FFF;
+  padding: 1em 2em;
+}
+
+.ticker-list-view {
+  background-color: #777;
+  color: #D8E0E8;
+  margin: 1em;
+}
+
+.watch-list-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin: 5px;
+}
+.watch-list-item__button {
+  border: 1px solid #D8E0E8;
+  color: #D8E0E8;
+  background-color: #777;
+}
+.watch-list-item__button:active {
+  color: #777;
+  background-color: #D8E0E8;
+}
+
+.ticker-search-view {
+  border: 3px solid #777;
+  margin: 1em;
+}
+
+.search-result {
+  text-align: center;
+}
+
+.ticker-card-container {
+  width: 100vw;
+}
+
+.ticker-card {
+  margin-bottom: 1em;
+  height: fit-content;
+  background-color: #D8E0E8;
+}
+
+.low {
+  border: 3px solid #EB6C7B;
+  color: #EB6C7B;
+}
+
+.high {
+  border: 3px solid #8ad3a4;
+  color: #8ad3a4;
+}
+
+@media only screen and (min-width: 650px) {
+  header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .ticker-card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+
+  .ticker-card {
+    min-width: 15em;
+  }
+}
+@media only screen and (min-width: 900px) {
+  header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .ticker-card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
+
+  .ticker-card {
+    min-width: 10em;
+    margin-right: 1em;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
