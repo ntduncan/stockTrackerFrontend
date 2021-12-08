@@ -1,19 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
-$primary: #D8E0E8;
-$secondary: #777;
-$background: #F1F1F1;
-$low: #EB6C7B;
-$high:	#8ad3a4;
-$font-family:'Inter', sans-serif;
-
+@import "variables";
+@import "loader";
 
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: $background;
+    background-color: $primary;
     font-family: $font-family;
+    color: $background;
 }
 
 header {
@@ -66,16 +61,22 @@ input[type=text] {
 }
 
 .banner {
-    background-color: $secondary;
-    color: #FFF;
-    padding: 1em 2em;
-
+    color: $background;
+    font-size: larger;
+    
+    display:grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+    .title{
+        grid-column: 2/12
+    }
 }
 
 .ticker-list-view {
-    background-color: $secondary;
+    background-color: $background;
     color: $primary;
     margin: 1em;
+    box-shadow: $box-shadow-two;
 }
 
 .watch-list-item {
@@ -84,18 +85,20 @@ input[type=text] {
     margin: 5px;
     &__button{
         border: 1px solid $primary;
-        color: $primary;
-        background-color: $secondary;
+        color: $secondary;
+        
         &:active {
-            color: $secondary;
-            background-color: $primary;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+            background-color: $secondary;
         }
     }
 }
 
 .ticker-search-view {
-    border: 3px solid $secondary;
+    // border: 3px solid $secondary;
     margin: 1em;
+    box-shadow: $box-shadow-two;
+    border: 1px solid $background;
 }
 
 .search-result {
@@ -109,9 +112,25 @@ input[type=text] {
 .ticker-card {
     margin-bottom: 1em;
     height: fit-content;
-    background-color: $primary;
-    
-    
+    background-color: $background;
+    box-shadow: $box-shadow-one;
+    &:hover {
+        background-color: darken($background, 10);
+        // color: $background;
+    }
+}
+
+.ticker-news-list{
+    li {
+        margin-bottom: 1em;
+    }
+    a {
+        text-decoration: none;
+        color: $secondary;
+        &:hover {
+            color: $primary;
+        }
+    }
 }
 
 .low {
@@ -147,6 +166,11 @@ input[type=text] {
     header {
         display: grid;
         grid-template-columns: 1fr 2fr;
+        padding: 0 5%;
+    }
+
+    main {
+        padding: 0 5%;
     }
     .ticker-card-container {
         display: flex;

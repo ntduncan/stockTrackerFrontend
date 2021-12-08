@@ -46,9 +46,10 @@ function initalizeWatchList(){
 
 function initalizeCards(){
     //Load Page With User Tickers
+
     const tickerList = getTickers();
+    tickerCardContainer.innerHTML = "";
     if(tickerList.length > 0){
-        tickerCardContainer.innerHTML = "";
         tickerList.forEach(ticker => {
             searchStock(ticker)
             .then(response => response.json())
@@ -66,17 +67,41 @@ function initalizeCards(){
 function addTickerCard(stockData, ticker) {
     //Create TickerCard
     const tickerCard = document.createElement("div");
+    const tickerNews = document.createElement("div");
+    const newsTitle = document.createElement("h3");
+    const newsList = document.createElement("ul");
+
     tickerCard.classList = "ticker-card block";
-    
+    console.log(stockData)
     //Add Class for card color
     stockData.currentPrice < stockData.previousClosePrice ? tickerCard.classList.add("low"):tickerCard.classList.add("high");
     
     //initalize text inside the card
     tickerCard.innerHTML = `
     <h2>${tickers.getCompanyName(ticker)}</h2>
-    <p>$${stockData.currentPrice} | ( ${(stockData.currentPrice - stockData.previousClosePrice).toFixed(2)} )</p>
-    `
+    <p>$${stockData.currentPrice} | ( ${(stockData.currentPrice - stockData.previousClosePrice).toFixed(2)} )</p>`
+
+    tickerNews.classList.add("ticker-news-window");
+    newsTitle.innerHTML = "News";
+    newsList.classList.add("ticker-news-list")
+    tickerNews.hidden = true;
+
+    stockData.companyNews.forEach(story => {
+        newsList.innerHTML += `<li><a href='${story.url}' target="_window">${story.headline}</a></li>`
+    })
+
+    tickerCard.addEventListener("click", () => {
+        if(tickerNews.hidden == true){
+            tickerNews.hidden = false; 
+        } else {
+            tickerNews.hidden = true;
+        }
+    })
+
     // Append TickerCard
+    tickerNews.appendChild(newsTitle);
+    tickerNews.appendChild(newsList);
+    tickerCard.appendChild(tickerNews);
     tickerCardContainer.appendChild(tickerCard);
 }
 
@@ -94,6 +119,7 @@ function addListViewItem(ticker) {
     listItemButton.textContent = "X";
     listItemButton.addEventListener("click", () => {
         removeTickerFromList(ticker)
+        initalizeCards()
         initalizeWatchList()
     })
     listItemContainer.appendChild(listItemTitle);
