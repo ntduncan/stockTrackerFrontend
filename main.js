@@ -8,7 +8,7 @@ const tickerSearchResult = document.querySelector(".search-result")
 import {Tickers} from "./Tickers.js"
 import {getTickers, addTickerToList, removeTickerFromList} from "./localStorageHandler.js";
 
-const baseUrl = "http://stock-watcher-tool.herokuapp.com";
+const baseUrl = "https://stock-watcher-tool.herokuapp.com";
 const tickers = new Tickers();
 
 //If LocalStorage is not initialized for the browser, initialize it.
