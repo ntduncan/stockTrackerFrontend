@@ -8,7 +8,7 @@ const tickerSearchResult = document.querySelector(".search-result")
 import {Tickers} from "./Tickers.js"
 import {getTickers, addTickerToList, removeTickerFromList} from "./localStorageHandler.js";
 
-const baseUrl = "http://127.0.0.1:5000";
+const baseUrl = "http://stock-watcher-tool.herokuapp.com";
 const tickers = new Tickers();
 
 //If LocalStorage is not initialized for the browser, initialize it.
@@ -24,10 +24,11 @@ if(!localStorage.getItem("tickers")){
 * returns: Promise
 */
 function searchStock(ticker) {
+    console.log(ticker);
     return fetch(baseUrl + "/getOne", {
         method: "POST", 
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({ticker: ticker}),
     })
@@ -47,8 +48,8 @@ function initalizeWatchList(){
 function initalizeCards(){
     //Load Page With User Tickers
 
-    const tickerList = getTickers();
     tickerCardContainer.innerHTML = "";
+    const tickerList = getTickers();
     if(tickerList.length > 0){
         tickerList.forEach(ticker => {
             searchStock(ticker)
