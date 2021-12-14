@@ -9,6 +9,7 @@ import {Tickers} from "./Tickers.js"
 import {getTickers, addTickerToList, removeTickerFromList} from "./localStorageHandler.js";
 
 const baseUrl = "https://stock-watcher-tool.herokuapp.com";
+// const baseUrl = "http://127.0.0.1:5000"; //For Testing Locally
 const tickers = new Tickers();
 
 //If LocalStorage is not initialized for the browser, initialize it.
@@ -18,13 +19,12 @@ if(!localStorage.getItem("tickers")){
     localStorage.setItem("tickers", myJSON)
 }
 
-/*
-* function searchStock
-* Description: sends a call to the stock api.
-* returns: Promise
-*/
+/**
+ * @description Sends a request to server to retrieve stock information
+ * of a given company that is specified by the provided ticker.
+ * @param {*} ticker 
+ */
 function searchStock(ticker) {
-    console.log(ticker);
     return fetch(baseUrl + "/getOne", {
         method: "POST", 
         headers: {
@@ -35,6 +35,9 @@ function searchStock(ticker) {
     })
 }
 
+/**
+ * @description Initializes all the list view items for the watch list on load
+ */
 function initalizeWatchList(){
     tickerListView.innerHTML = "";
     const tickerList = getTickers();
@@ -46,12 +49,21 @@ function initalizeWatchList(){
     }
 }
 
+/**
+ * @description Initializes all the cards for the ticker card container on load
+ */
 function initalizeCards(){
     //Load Page With User Tickers
 
-    tickerCardContainer.innerHTML = "";
     const tickerList = getTickers();
-    if(tickerList.length > 0){
+    tickerCardContainer.textContent = "";
+    
+    if(tickerList.length === 0){
+        const noCardsMessage = document.createElement("h2");
+        noCardsMessage.innerHTML = "hmm... It doesn't look like you're watching any stocks..."
+        tickerCardContainer.appendChild(noCardsMessage);
+    } else {
+        if(tickerCardContainer.children[0] == "h2") console.log("meh")
         tickerList.forEach(ticker => {
             searchStock(ticker)
             .then(response => response.json())
@@ -59,14 +71,16 @@ function initalizeCards(){
                 addTickerCard(stockData, ticker);
             });
         })
-    } else {
-        const noCardsMessage = document.createElement("h2");
-        noCardsMessage.innerHTML = "hmm... It doesn't look like you're watching any stocks yet..."
-        tickerCardContainer.appendChild(noCardsMessage);
     }
 }
 
+/**
+ * @description Adds a new ticker card to the ticker body
+ * @param {*} stockData 
+ * @param {*} ticker 
+ */
 function addTickerCard(stockData, ticker) {
+
     //Create TickerCard
     const tickerCard = document.createElement("div");
     const tickerNews = document.createElement("div");
@@ -74,7 +88,7 @@ function addTickerCard(stockData, ticker) {
     const newsList = document.createElement("ul");
 
     tickerCard.classList = "ticker-card block";
-    console.log(stockData)
+    
     //Add Class for card color
     stockData.currentPrice < stockData.previousClosePrice ? tickerCard.classList.add("low"):tickerCard.classList.add("high");
     
@@ -105,8 +119,14 @@ function addTickerCard(stockData, ticker) {
     tickerNews.appendChild(newsList);
     tickerCard.appendChild(tickerNews);
     tickerCardContainer.appendChild(tickerCard);
+
+    //Just in case this is the first card
 }
 
+/**
+ * @description Adds a list item to the list view when given a ticker
+ * @param {*} ticker 
+ */
 function addListViewItem(ticker) {
     const listItemContainer = document.createElement("div");
     listItemContainer.classList.add("watch-list-item");
@@ -132,9 +152,15 @@ function addListViewItem(ticker) {
 tickerSearchButton.addEventListener("click", () => {
     const ticker = tickerSearchInput.value.toUpperCase();
 
+    if(getTickers().includes(ticker)) {
+        alert(`It looks like you are already tracking ${ticker}`)
+        return;
+    }
+
     searchStock(ticker)
     .then(response => response.json())
     .then(stockData => {
+
         // Create Title
         const title = document.createElement("h3");
         title.innerHTML = `${tickers.getCompanyName(ticker)}: $${stockData.currentPrice}`;
