@@ -89,7 +89,7 @@ function addTickerCard(stockData, ticker) {
     //initalize text inside the card
     tickerCard.innerHTML = `
     <h2>${tickers.getCompanyName(ticker)}</h2>
-    <p>$${stockData.currentPrice} | ( ${(stockData.currentPrice - stockData.previousClosePrice).toFixed(2)} )</p>`
+    <p>$${stockData.currentPrice.toFixed(2)} | ( ${(stockData.currentPrice - stockData.previousClosePrice).toFixed(2)} )</p>`
 
     tickerNews.classList.add("ticker-news-window");
     newsTitle.innerHTML = "News";
