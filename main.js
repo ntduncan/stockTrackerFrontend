@@ -157,7 +157,7 @@ tickerSearchButton.addEventListener("click", () => {
 
         // Create Title
         const title = document.createElement("h3");
-        title.innerHTML = `${tickers.getCompanyName(ticker)}: $${stockData.currentPrice}`;
+        title.innerHTML = `${tickers.getCompanyName(ticker)}: $${stockData.currentPrice.toFixed(2)}`;
 
         //Create Add Button
         const addButton = document.createElement("button");
