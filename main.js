@@ -54,24 +54,18 @@ function initalizeWatchList(){
  */
 function initalizeCards(){
     //Load Page With User Tickers
-
     const tickerList = getTickers();
     tickerCardContainer.textContent = "";
     
-    if(tickerList.length === 0){
-        const noCardsMessage = document.createElement("h2");
-        noCardsMessage.innerHTML = "hmm... It doesn't look like you're watching any stocks..."
-        tickerCardContainer.appendChild(noCardsMessage);
-    } else {
-        if(tickerCardContainer.children[0] == "h2") console.log("meh")
-        tickerList.forEach(ticker => {
-            searchStock(ticker)
-            .then(response => response.json())
-            .then(stockData => {
-                addTickerCard(stockData, ticker);
-            });
-        })
-    }
+    if(tickerCardContainer.children[0] == "h2") console.log("meh")
+    tickerList.forEach(ticker => {
+        searchStock(ticker)
+        .then(response => response.json())
+        .then(stockData => {
+            addTickerCard(stockData, ticker);
+        });
+    })
+    
 }
 
 /**
