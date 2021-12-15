@@ -288,6 +288,18 @@ input[type=text] {
   color: #3984f3;
 }
 
+footer {
+  border-top: 1px solid white;
+  text-align: center;
+  padding: 20px 5vw;
+  margin: 0 5%;
+  position: fixed;
+  width: 80%;
+  left: 0;
+  bottom: 0;
+  font-size: xx-small;
+}
+
 @media only screen and (min-width: 650px) {
   header {
     display: grid;
